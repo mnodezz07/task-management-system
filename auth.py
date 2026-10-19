@@ -4,10 +4,10 @@ import hashlib
 import os
 from functools import wraps
 
-FILE = "users.json"
+FILE = "data/users.json"
 
 
-# Authentication decorator
+
 def login_required(func):
     @wraps(func)
     def wrapper(auth, *args, **kwargs):
