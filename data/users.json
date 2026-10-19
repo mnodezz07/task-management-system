@@ -18,5 +18,10 @@
         "username": "Sandy",
         "password": "86e0cc0c6dcb5c7146159cc5e873e30294afa60f9421feb3e9a735579a97b242",
         "role": "admin"
+    },
+    {
+        "username": "Luv",
+        "password": "5dd272b4f316b776a7b8e3d0894b37e1e42be3d5d3b204b8a5836cc50597a6b1",
+        "role": "user"
     }
 ]

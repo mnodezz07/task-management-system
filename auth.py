@@ -5,7 +5,9 @@ import os
 from functools import wraps
 
 FILE = "data/users.json"
-
+class Person:
+    def __init__(self, username):
+        self.username = username
 
 
 def login_required(func):
@@ -19,12 +21,16 @@ def login_required(func):
     return wrapper
 
 
-class Auth:
+class Auth(Person):
     def __init__(self):
+        super().__init__("SystemAdmin")
         self.users = self.load_users()
         self.current_user = None
 
     def load_users(self):
+        if not os.path.exists("data"):
+            os.makedirs("data")
+            
         if os.path.exists(FILE):
             with open(FILE, "r") as file:
                 return json.load(file)
