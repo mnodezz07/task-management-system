@@ -1,4 +1,3 @@
-
 """Task management for the CLI project."""
 
 import json
@@ -42,9 +41,7 @@ class Task:
         self.title = title.strip()
         self.description = description.strip()
         self.created_by = str(created_by)
-        self.assigned_to = (
-            str(assigned_to) if assigned_to is not None else None
-        )
+        self.assigned_to = str(assigned_to) if assigned_to is not None else None
         self.project_id = (
             str(project_id) if project_id is not None else None
         )
@@ -202,77 +199,3 @@ def update_task_status(task_id, status):
     save_tasks(tasks)
     return task
 
-def task_menu():
-    while True:
-        print("\n===== TASK MANAGEMENT =====")
-        print("1. Create task")
-        print("2. View tasks")
-        print("3. Edit task")
-        print("4. Delete task")
-        print("5. Update task status")
-        print("0. Exit")
-
-        choice = input("Choose an option: ").strip()
-
-        try:
-            if choice == "1":
-                title = input("Task title: ")
-                description = input("Task description: ")
-                user_id = input("Your user ID: ")
-
-                task = create_task(title, description, user_id)
-                print(f"Task created! ID: {task.id}")
-
-            elif choice == "2":
-                tasks = view_tasks()
-
-                if not tasks:
-                    print("No tasks found.")
-                else:
-                    for task in tasks:
-                        print(f"\nID: {task.id}")
-                        print(f"Title: {task.title}")
-                        print(f"Description: {task.description}")
-                        print(f"Status: {task.status}")
-                        print(f"Created by: {task.created_by}")
-
-            elif choice == "3":
-                task_id = input("Task ID to edit: ")
-                title = input("New title (blank to keep current): ")
-                description = input(
-                    "New description (blank to keep current): "
-                )
-
-                edit_task(
-                    task_id,
-                    title=title if title.strip() else None,
-                    description=description if description.strip() else None,
-                )
-                print("Task updated successfully.")
-
-            elif choice == "4":
-                task_id = input("Task ID to delete: ")
-                delete_task(task_id)
-                print("Task deleted successfully.")
-
-            elif choice == "5":
-                task_id = input("Task ID: ")
-                print("Pending | In Progress | Completed")
-                status = input("New status: ")
-
-                update_task_status(task_id, status)
-                print("Task status updated.")
-
-            elif choice == "0":
-                print("Goodbye!")
-                break
-
-            else:
-                print("Please choose an option from 0 to 5.")
-
-        except ValueError as error:
-            print(f"Error: {error}")
-
-
-if __name__ == "__main__":
-    task_menu()

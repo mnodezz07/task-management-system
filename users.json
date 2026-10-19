@@ -3,5 +3,10 @@
         "username": "dee",
         "password": "74549f4d77a69f79e6cb27f9a31e6eb32760aa42cde76e00f3e6f2fbb95aa91f",
         "role": "admin"
+    },
+    {
+        "username": "star",
+        "password": "36e77a446d7a6eeda93e0606184a161d47e9e75d7f812fe77d5e851feddd6e95",
+        "role": "user"
     }
 ]
