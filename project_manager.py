@@ -12,8 +12,11 @@ class ProjectManager:
             with open(self.filepath, "w") as file:
                 json.dump([], file)
             return []
-        with open(self.filepath, "r") as file:
-            return json.load(file)
+        try:
+            with open(self.filepath, "r") as file:
+                return json.load(file)
+        except json.JSONDecodeError:
+            return []
 
     def _save_data(self, data):
         with open(self.filepath, "w") as file:
@@ -33,12 +36,11 @@ class ProjectManager:
         projects = self._load_data()
         return [p for p in projects if p["user_username"] == user_username]
 
-    def assign_task_to_project(self, project_id, task_id):
+    def add_task_to_project(self, project_id, task_data):
         projects = self._load_data()
         for p in projects:
             if p["project_id"] == project_id:
-                if task_id not in p["task_ids"]:
-                    p["task_ids"].append(task_id)
-                    self._save_data(projects)
-                    return True
+                p["tasks"].append(task_data)
+                self._save_data(projects)
+                return True
         return False

@@ -1,13 +1,13 @@
 import uuid
 
 class Project:
-    def __init__(self, title, description, due_date, user_username):
-        self.project_id = str(uuid.uuid4())[:8]
+    def __init__(self, title, description, due_date, user_username, project_id=None, tasks=None):
+        self.project_id = project_id if project_id else str(uuid.uuid4())[:8]
         self.title = title
         self.description = description
         self.due_date = due_date
         self.user_username = user_username
-        self.task_ids = []
+        self.tasks = tasks if tasks else []
 
     @property
     def title(self):
@@ -19,6 +19,10 @@ class Project:
             raise ValueError("Project title must be a non-empty string.")
         self._title = value
 
+    def add_task_object(self, task_data):
+        self.tasks.append(task_data)
+        return True
+
     def to_dict(self):
         return {
             "project_id": self.project_id,
@@ -26,5 +30,5 @@ class Project:
             "description": self.description,
             "due_date": self.due_date,
             "user_username": self.user_username,
-            "task_ids": self.task_ids
+            "tasks": self.tasks
         }
